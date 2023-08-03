@@ -1,0 +1,19 @@
+{% for categorie in categories %}
+<li class="nav-item "><a class="nav-link text-dark fs-5 nav-menu " aria-current="page"
+        href="{{path('categorie_produit', {categorie: categorie.id})}}">{{categorie.nom}}</a></li>
+{% endfor %}
+<li class="nav-item "><a class="nav-link text-dark fs-5 nav-menu" aria-current="page"
+        href="{{ path('contact_us') }}">Besoin d'aide ?</a></li>
+
+<div class="dropdown">
+    <button class="btn dropdown-toggle fs-5" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+        aria-expanded="false">
+        Mon compte
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <li><a class="nav-link text-dark fs-5 nav-menu  " aria-current="page"
+                href="{{ path('app_login') }}">Connexion</a></li>
+        <li><a class="nav-link text-dark fs-5 nav-menu  " aria-current="page"
+                href="{{ path('app_register') }}">S'inscription</a></li>
+    </ul>
+</div>

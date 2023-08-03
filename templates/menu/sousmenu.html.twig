@@ -1,0 +1,9 @@
+                  {% if souscategories|length !=null %}
+                  <ul>
+                        {% for souscategorie in souscategories %}
+                        <li><a href="{{ path('souscategorie_produit', {souscategorie: souscategorie.id}) }}">{{
+                                    souscategorie }}</a></li>
+                        {% endfor %}
+                  </ul>
+
+                  {% endif %}

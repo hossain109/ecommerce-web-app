@@ -1,0 +1,25 @@
+
+{% extends "base.html.twig" %}
+{% block title %}Register{% endblock %}
+
+{% block section %}
+<div class="container mt-4">
+      <div class="row">
+            <div class="col-md-7 mx-auto">
+
+                <h1>S'inscription</h1>
+                <div class=" p-4 rounded border border-secondary opacity-50 mb-4">
+                    {{ form_start(registrationForm) }}
+                    {{ form_row(registrationForm.nom) }}
+                    {{ form_row(registrationForm.portable) }}
+                    {{ form_row(registrationForm.adresse) }}
+                        {{ form_row(registrationForm.email) }}
+                        {{ form_row(registrationForm.plainPassword) }}
+                        {{ form_row(registrationForm.aggrement) }}
+                    {{ form_end(registrationForm) }}
+
+                </div>
+            </div>
+      </div>
+</div>
+{% endblock %}

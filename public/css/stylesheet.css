@@ -1,0 +1,78 @@
+
+/* nav menu */
+
+.nav-menu:hover{
+  color:#198754 !important;
+  background-color: #fff;
+}
+/* afficher panier a droite */
+.panier-item {
+  background: rgb(207, 181, 181);
+  border-bottom: 1px solid black;
+  padding: 0.6rem;
+  color: whitesmoke;
+}
+#panier-display {
+  position: fixed;
+  right: 13px;
+  top: 50%;
+  box-shadow: 2px 2px 2px;
+  cursor: pointer;
+  z-index: 99999;
+}
+
+/*
+.display-produit {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 20px;
+}
+
+.produit-item {
+  border: 2px solid red;
+  border-radius: 5px;
+  background-color: rgb(222, 229, 233);
+}
+*/
+/* css partie envie*/
+.imgfix{
+  height: 250px;
+}
+.imgfix:hover{
+  opacity: .9;
+}
+.image-link{
+  position: relative;
+}
+.image-text{
+  position: absolute;
+  top: 0;
+  right: 40%;
+}
+
+/*panier icon hover*/
+.panier-icon:hover {
+  color: rgb(235, 227, 227);
+}
+.inscription:hover {
+  color: rgb(45, 41, 41);
+}
+.connecxion:hover {
+  color: rgb(45, 41, 41);
+}
+.produit-details {
+  padding: 0 5px;
+}
+/*souscription message*/
+.souscription-success {
+  background-color: rgb(136, 223, 136);
+  padding: 0.5rem;
+  font-size: 1.2rem;
+}
+/*partie sous footer*/
+.footer{
+  min-height: 10vh;
+}
+.active{
+  background-color: blue;
+}

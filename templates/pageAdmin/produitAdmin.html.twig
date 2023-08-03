@@ -1,0 +1,27 @@
+
+{% extends "baseAdmin.html.twig" %}
+
+{% block section %}
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+{% if app.session.flashBag.has('success') %}
+<div class="alert alert-success">
+      {% for msg in app.session.flashBag.get('success') %}
+      {{ msg }}
+      {% endfor %}
+</div>
+{% endif %}
+<h4 class='mt-5 mb-2'>Ajouter Produit</h4>
+<p class="mb-3 text-danger">D'abord ajouter une image avant de ajouter un produit</p>
+{{ form_start(form) }}
+{{ form_row(form.nom) }}
+{{ form_row(form.description) }}
+{{ form_row(form.prix) }}
+{{ form_row(form.disponible) }}
+{{ form_row(form.categorie) }}
+{{ form_row(form.image) }}
+{{ form_row(form.tva) }}
+{{ form_end(form) }}
+
+
+{% endif %}
+{% endblock %}

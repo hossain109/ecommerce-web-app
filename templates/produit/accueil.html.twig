@@ -1,0 +1,136 @@
+{% extends "base.html.twig" %} {% block section %}
+
+<!---Nivo slider-->
+<div id="wrapper">
+  <div class="slider-wrapper theme-default">
+    <div id="slider" class="nivoSlider">
+      <img src="{{asset('slider/images/slider1.jpg')}}" data-thumb="{{asset('slider/images/slider1.jpg')}}"
+        alt="slider-image" title="#htmlcaption1" />
+      <a href="#">
+        <img src="{{asset('slider/images/slider2.jpg')}}" data-thumb="{{asset('slider/images/slider2.jpg')}}"
+          alt="slider-image" title="#htmlcaption2" /></a>
+      <img src="{{ asset('slider/images/slider3.jpg') }}" data-thumb="{{asset('slider/images/slider3.jpg')}}"
+        alt="slider-image" data-transition="slideInLeft" title="#htmlcaption3" />
+      <img src="{{asset('slider/images/slider4.jpg')}}" data-thumb="{{asset('slider/images/slider4.jpg')}}"
+        alt="slider-image" title="#htmlcaption4" />
+
+    </div>
+    <div id="htmlcaption1" class="nivo-html-caption">
+      <strong class="caption-text"> Les meilleurs fruits et légumes de Rungis livrés chez vous </strong>
+      <p class="caption-button"><a class="btn btn-success" href="#">Commencer</a></p>
+    </div>
+    <div id="htmlcaption2" class="nivo-html-caption">
+      <strong class="caption-text"> Meilleurs Produits Primeurs Sélectionnés par nos équipes </strong>
+      <p class="caption-button"><a class="btn btn-success" href="#">B link</a></p>
+    </div>
+    <div id="htmlcaption3" class="nivo-html-caption">
+      <strong class="caption-text"> Des Fruits et légumes de qualité au juste prix </strong>
+      <p class="caption-button"><a class="btn btn-success" href="#">C link</a></p>
+    </div>
+    <div id="htmlcaption4" class="nivo-html-caption">
+      <strong class="caption-text"> Livraison express En Ile-de-France </strong>
+      <p class="caption-button"><a class="btn btn-success" href="#">D link</a></p>
+    </div>
+  </div>
+</div>
+<!-----partie sommaire de site-->
+<div class="container-fluid">
+  <div class="container">
+    <div class="row p-5">
+      <div class="col-md-6">
+        <h2 class="fw-bolder">Notre zone de livraison</h2>
+        <p class="fs-5 text-warning">Vos fruits et légumes livrés en Île-de-France</p>
+        <p class="fs-6">
+          Je vous remerciant d'avoir choisir le Virtual Commerce pour la livraison de vos fruits et legumes. Il sont été
+          consiencieusement choisis avec soins.
+        <p class="fs-6">
+          N'hesitez pas à nos faire vos retour ou à la aimer nos pages facebook et instagram.
+        </p>
+        <p class="fs-6">
+          Bonne dégustation et bientot sur virtaulcommerce.fr !!
+        </p>
+        </p>
+      </div>
+      <div class="col-md-6 ">
+        <h3 class="fw-bolder text-center">Le Virtual Commerce, votre primeur en ligne</h3>
+        <p class="fs-5 text-warning"> Depuis quelques anées nous facilitons votre quotidien</p>
+        <p class="fs-6">Dès sa création en 1963, Les 5 fermes s'est donné pour mission de rapprocher producteurs et
+          consommateurs
+          autour
+          des notions de qualité et juste prix.
+          Grâce à notre savoir-faire, nous rendons aujourd'hui à portée de clic:</p>
+        <ul class="list-unstyled ps-5">
+          <li>Des fruits et légumes variées et de saisons</li>
+          <li>La garantie de produits de qualités et première fraicheur</li>
+          <li> Une livraison gratuite directement de Rungis à chez vous, dès 40€ d'achat</li>
+        </ul>
+      </div>
+      <div class="text-center mt-3"><a href="{{path('all_product')}}"
+          class="text-center btn btn-success w-auto">Découvrez
+          nos produits</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- partie envie ---->
+<div class="container-fluid bg-light pb-1" style="min-height: 50vh;">
+  <div class="container">
+    <h3 class="text-center p-3 fw-bolder">De quoi avez-vous envie?</h3>
+    <p class="text-center fs-4 text-warning ">Vos fruits et légumes de qualité, de Rungis à chez vous en un clic</p>
+    <div class="row mt-5 mb-5">
+      <div class="col-md-4">
+        <a href="{{path('categorie_produit', {categorie: 6})}}" class="image-link"> <img
+            class="rounded-3 opacity-50 imgfix m-3 " src="{{ asset('images/accueil1.jpg') }}" height="200" width="95%"
+            alt="image accueil">
+          <p class="image-text text-center text-light fs-3 fw-bolder">Legumes</p>
+        </a>
+      </div>
+      <div class=" col-md-4">
+        <a href="{{path('categorie_produit', {categorie: 7})}}" class="image-link"> <img
+            class="rounded-3 opacity-50 imgfix m-3 " src="{{ asset('images/accueil2.jpg') }}" height="200" width="95%"
+            alt="image accueil">
+          <p class="image-text text-center text-light fs-3 fw-bolder">Fruits</p>
+        </a>
+      </div>
+      <div class="col-md-4">
+        <a href="{{path('categorie_produit', {categorie: 8})}}" class="image-link"> <img
+            class="rounded-3 opacity-50 imgfix m-3 " src="{{ asset('images/aceuil3.jpg') }}" height="200" width="95%"
+            alt="image accueil">
+          <p class="image-text text-center text-light fs-3 fw-bolder">Fruits Secs</p>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<!----parite retour au experience---->
+<div class="container-fluid bg-success" style="min-height: 50vh;">
+  <div class="container">
+    <h3 class="text-light text-center pt-5 fw-bolder pb-5">Nos clients racontent leur expérience Le Vritual Commerce
+    </h3>
+    <div class="row">
+      <div class="col-md-4">
+        <p class="bg-light p-4 rounded-3"><span
+            class="fs-4 text-success d-block">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+          <sapn class="d-block"> fruits et légumes donnent
+            envie, c'est principalement
+            pour ça que j'y vais, pour le reste c'est quand même très correct.<strong> Léa Belacel</strong></sapn>
+        </p>
+      </div>
+      <div class="col-md-4">
+        <p class="bg-light p-4 rounded-3"><span
+            class="fs-4 text-success d-block">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+          <sapn class="d-block"> Fidèle car toujours satisfait du stock, notamment en produits frais que je trouve
+            particulièrement à la hauteur !<strong> Cy Monavis</strong></sapn>
+        </p>
+      </div>
+      <div class="col-md-4">
+        <p class="bg-light p-4 rounded-3"><span
+            class="fs-4 text-success d-block">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+          <sapn class="d-block"> Des fruits et légumes frais (pas comme d'autres concurrents). Vous y trouverez un
+            maximum de choses essentielles.<strong>Jihanne F</strong></sapn>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

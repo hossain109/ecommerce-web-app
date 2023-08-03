@@ -1,0 +1,11 @@
+{% if items|length !=null %}
+<div id="panier-display" onclick="">
+  <a
+    href="{{ path('panier_index') }}"
+    class="text-decoration-none font-weight-bold"
+  >
+    <div class="panier-item">{{ items }}&nbsp;Item&nbsp;(s)</div>
+    <div class="panier-item">&euro;&nbsp;{{ totalTTC }}</div>
+  </a>
+</div>
+{% endif %}

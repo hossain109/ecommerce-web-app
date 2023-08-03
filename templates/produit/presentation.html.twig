@@ -1,0 +1,38 @@
+{% extends "base.html.twig" %} {% block section %}
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-5">
+      <img class="img-thumbnail" src="../images{{ asset(produit.image.path) }}" alt="{{ produit.image.alt }}" width="300"
+        height="300" />
+    </div>
+    <div class="col-md-7">
+      <h5 class="text-start">{{ produit.nom }}</h5>
+      <p>{{ produit.description }}</p>
+      <p>
+        <span>Prix: {{ produit.prix }}&#8364;</span>
+        <span class="float-end">{{
+          produit.disponible ? " <span class='text-success'>En Stock</span>" : "<span class='text-danger'>Non Stock</span>"
+          }}</span>
+      </p>
+      <p>Produit Tva: {{produit.tva.valeur}}&nbsp;%
+      <form action="{{ path('ajout_panier', {id:produit.id} ) }}" method="get">
+        Quantité:
+        <select name="qte" id="qte" class="">
+          {% for item in 1..10 %}
+          <option value="{{item}}">{{item}}</option>
+          {% endfor %}
+        </select>
+        <div>
+          {% if (produit.disponible) %}
+          <button class='btn btn-secondary mt-4'>Ajoute au Panier</button>
+          {% else %}
+          <button class='disabled btn btn-secondary mt-4'>Ajoute au Panier</button>
+          {% endif %}
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}

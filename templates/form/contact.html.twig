@@ -1,0 +1,33 @@
+{% extends "base.html.twig" %}
+
+{% block section %}
+<div class="container mt-4">
+      <div class="row">
+            <div class="col-md-7 mx-auto">
+
+                  {% if app.session.flashBag.has('send') %}
+
+                  <div class="alert alert-success text-center">
+                        {% for msg in app.session.flashBag.get('send') %}
+                        {{msg}}
+                        {% endfor %}
+                  </div>
+
+                  {% endif %}
+
+                  <p class="fs-4 fw-bolder mt-4 mb-4">Contactez-nous</p>
+                  <div class=" p-4 rounded border border-secondary opacity-50 mb-4">
+                        <p class="mt-1 mb-4">Notre équipe est à votre écoute pour toutes vos questions ou réclamations.
+                        </p>
+                        {{form_start(form, {'action': path('contact_action'), 'method':'POST' ,'attr': {'novalidate': 'novalidate'} }) }}
+                        {{form_row(form.nom)}}
+                        {{form_row(form.email)}}
+                        {{form_row(form.portable)}}
+                        {{form_row(form.message)}}
+                        {{form_end(form)}}
+                  </div>
+            </div>
+      </div>
+</div>
+
+{% endblock %}

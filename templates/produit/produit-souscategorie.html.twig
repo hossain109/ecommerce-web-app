@@ -1,0 +1,87 @@
+{% extends "base.html.twig" %} {% block section %}
+<div class="container">
+      <div class="row  m-5 justify-content-center">
+            <div class="header-left col-md-12 col-sm-12 ">
+                  {{
+                  render(
+                  controller("App\\Controller\\SearchController::searchForm")
+                  )
+                  }}
+            </div>
+      </div>
+      <!---Display Souscategorie-->
+      <div class="row">
+            <div class="col-md-2">
+                  {# {{ block("sousmenu", "produit/produit-categorie.html.twig") }}#}
+                  {% if souscategories|length !=null %}
+                  <ul class="list-unstyled">
+                        {% for souscategorie in souscategories %}
+                        <li class="page-link text-center"><a class="text-decoration-none"
+                                    href="{{ path('souscategorie_produit', { souscategorie: souscategorie.id }) }}">{{
+                                    souscategorie }}</a>
+                        </li>
+                        {% endfor %}
+                  </ul>
+                  {% endif %}
+            </div>
+            <div class="col-md-10">
+                  <div class="row">
+                        {% if produits|length !=null %}
+                        {% for produit in produits %}
+                        <div class="col-md-3 col-sm-6 xs-12">
+                              <div class="card">
+                                    <img class="card-img-top" src="../images{{ asset(produit.image.path) }}"
+                                          alt="{{ produit.image.alt }}" />
+                                    <div class="card-body">
+                                          <h5 class="card-title text-center">{{ produit.nom }}</h5>
+                                          <p>
+                                                <span>Prix: {{ produit.prix }}&#8364;</span>
+                                                <span class="float-end">{{
+                                                      produit.disponible ? " <span class='text-success'>En Stock</span>"
+                                                      : "<span class='text-danger'>Non
+                                                            Stock</span>"
+                                                      }}</span>
+                                          </p>
+                                          <p class="card-text">{{ produit.description }}</p>
+                                          <a href="{{ path('produit_presentation', { id: produit.id }) }}"
+                                                class="btn btn-info">Info</a>
+                                          {% if(produit.disponible) %}
+                                          <a href="{{ path('ajout_panier',{id: produit.id}) }}"
+                                                class="btn btn-secondary">Ajouter</a>
+                                          {% else %}
+                                          <a href="{{ path('ajout_panier',{id: produit.id}) }}"
+                                                class="disabled btn btn-secondary">Ajouter</a>
+                                          {% endif %}
+                                    </div>
+                              </div>
+                        </div>
+                        {% endfor %} {% else %}
+                        <h2>Aucun Produit</h2>
+                        {% endif %}
+                  </div>
+            </div>
+      </div>
+      <!-- Pagination produits -->
+      {% if isPaginated == true %}
+      <nav aria-label="Page navigation example">
+            <ul class="pagination mt-5 justify-content-center">
+                  {% if page != 1 %}
+                  <li class="page-item"><a class="page-link"
+                              href="{{ path('souscategorie_produit', { souscategorie:souscategorie.id,page: page-1, nbre:nbre }) }}">Précedant</a>
+                  </li>
+                  {% endif %}
+                  {% for i in range(1, nbPage) %}
+                  <li class="page-item"><a class="page-link active"
+                              href="{{ path('souscategorie_produit', { souscategorie:souscategorie.id,page: i, nbre:nbre }) }}">{{i}}</a>
+                  </li>
+                  {% endfor %}
+                  {% if page != nbPage %}
+                  <li class="page-item"><a class="page-link"
+                              href="{{ path('souscategorie_produit', { souscategorie:souscategorie.id,page: page+1, nbre:nbre }) }}">Suivant</a>
+                  </li>
+                  {% endif %}
+            </ul>
+      </nav>
+      {% endif %}
+</div>
+{% endblock %}

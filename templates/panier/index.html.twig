@@ -1,0 +1,116 @@
+{% extends "base.html.twig" %} {% block section %}
+{%set totalHT =0 %}
+{%set totalTTC=0 %}
+{%set refTva={} %}
+{% for element in datapanier %}
+{%set refTva = refTva|merge({ ('%' ~ element.produit.tva.valeur) : 0 })%}
+{% endfor %}
+<div class="container mt-4 mb-4">
+
+  <div class="row">
+    <section class="bg-light m-5">
+      <p class="fs-3 text-center">Votre panier</p>
+    </section>
+    <div id="mainAlertMessage">
+      {% if app.session.flashBag.has('success') %}
+      <div class="alert alert-success">
+        {% for msg in app.session.flashBag.get('success') %}
+        {{ msg }}
+        {% endfor %}
+      </div>
+      {% endif %}
+      {% if app.session.flashBag.has('delete') %}
+      <div class="alert alert-danger">
+        {% for msg in app.session.flashBag.get('delete') %}
+        {{ msg }}
+        {% endfor %}
+      </div>
+      {% endif %}
+      {% if app.session.flashBag.has('add') %}
+      <div class="alert alert-success">
+        {% for msg in app.session.flashBag.get('add') %}
+        {{ msg }}
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+    <div class="col-md-7">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Produit</th>
+            <th>Prix</th>
+            <th>Quantité</th>
+            <th>Total</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for element in datapanier %}
+          <tr>
+            <form action="{{ path('ajout_panier', { id:element.produit.id }) }}" method="get">
+              <td>
+                <a href="{{
+                        path('produit_presentation', { id: element.produit.id })
+                  }}">{{ element.produit.nom }}</a>
+              </td>
+              <td>{{ element.produit.prix }}&euro;</td>
+              <td>
+                {# {{ element.quantite }} #}
+                <select name="qte" onchange="this.form.submit()">
+                  {% for item in 1..10 %}
+                  <option value="{{ item }}" {% if item==element.quantite %} selected="selected" {% endif %}>{{ item }}
+                  </option>
+                  {% endfor %}
+                </select>
+              </td>
+              <td class="text-right">
+                {{ element.quantite * element.produit.prix }}&euro;
+              </td>
+              <td><a href="{{ path('produit_panier_supreme', { id: element.produit.id } ) }}"><i
+                    class="bi bi-trash3"></i></a></td>
+            </form>
+          </tr>
+          {% set totalHT = totalHT + (element.produit.prix * element.quantite) %}
+          {% set totalTTC = totalTTC +( element.produit.prix * element.quantite) * (element.produit.tva.multiplicate) %}
+
+          {% set refTva = refTva |merge({ ('%' ~ element.produit.tva.valeur) : refTva['%' ~ element.produit.tva.valeur]
+          + (element.produit.prix * element.quantite)*(element.produit.tva.multiplicate) }) %}
+
+          {% else %}
+          <tr>
+            <td colspan="5">Aucun produit dans votre panier</td>
+          </tr>
+          {% endfor %}
+
+        </tbody>
+      </table>
+    </div>
+    <div class="offset-1 col-md-4">
+      {%if datapanier|length !=0%}
+      <table class="table table-striped">
+        <tr>
+          <td class="">Total HT :</td>
+          <td class="fs-5">{{totalHT}}€</td>
+          </td>
+        </tr>
+        {% for key, tva in refTva %}
+        <tr>
+          <td class="">{{key}}</td>
+          <td class="fs-5">TTC&nbsp;{{tva}}&euro;</td>
+        </tr>
+        <tr>
+          {% endfor %}
+          <td class="">Total TTC:</td>
+          <td class="fs-5">{{totalTTC}}€</td>
+          </td>
+        </tr>
+      </table>
+      <a href="{{path('livraison_produit')}}" class="btn btn-success mt-2">Valider mon panier</a>
+      {% endif %}
+      <a href="{{path('all_product')}}" class="btn btn-primary mt-2">Continuer mes achats</a>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

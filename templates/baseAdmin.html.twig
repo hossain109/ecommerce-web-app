@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8" />
+      <title>{% block title %}Commerce Fruits et Legumes!{% endblock %}</title>
+      <meta name="keywords" content="{% block motCles %} {% endblock %}" />
+      <meta name="description" content="{% block description %} {% endblock %}" />
+      <link rel="icon" href="{{ asset('images/icon.png') }}" />
+
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+            crossorigin="anonymous" />
+      <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" />
+      <link rel="stylesheet" href="{{ asset('css/stylesheet.css') }}" type="text/css" />
+</head>
+
+<body>
+      {% block main %}
+      <div class="container-fluid">
+            <header class="pt-3 pb-3 bg-success">
+                  {% block header %}
+                  <div class="row">
+                        <div class="col text-center">
+                              <span class="text-light fw-bold fs-5">Nouveaux horaires de livraison &#x1F69A; 07:00 à
+                                    22:00 du lundi au
+                                    vendredi ! |
+                                    Posez vos questions
+                                    sur Whatsapp &#128222; +33751292264</span>
+                        </div>
+                  </div>
+                  {% endblock %}
+            </header>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+                  {% block nav %}
+                  <div class="container">
+
+                        <a href="{{ path('admin_addproduit') }}" class="navbar-brand text-decoration-none text-light">
+                              <img src="{{ asset('images/logo.png') }}" alt="logo" class="logo" height="40"
+                                    width="40" /><span class="text-dark">@Authentification</span>
+                        </a>
+                  </div>
+                  {% endblock %}
+            </nav>
+            <div class="container">
+                  <div class="row">
+                        <div class="col-md-3 border-2 border-end">
+                              {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                              <ul class="list-unstyled">
+                                    <li class="page-link text-center"><a class="text-decoration-none"
+                                                href="{{ path('admin_addproduit') }}">Ajouter
+                                                Produit</a>
+                                    </li>
+                                    <li class="page-link text-center"><a class="text-decoration-none"
+                                                href="{{ path('admin_addMedia') }}">Ajouter Un
+                                                image de produit</a>
+                                    </li>
+                                    <li class="page-link text-center"><a class="text-decoration-none"
+                                                href="{{ path('admin_souscategorie') }}">Ajouter
+                                                Souscategorie</a>
+                                    </li>
+                                    <li class="page-link text-center bg-warning">
+                                    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                                                 <a class="text-decoration-none text-light fs-5" href="{{ path('app_logout') }}">Déconnexion</a>
+                                          {% endif %}
+                                    </li>
+                              </ul>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-9 pt-5 pb-5">
+                              <main>
+                                    {% block section %}
+
+                                    {% endblock %}
+
+                                    <aside>{% block aside %}{% endblock %}</aside>
+                              </main>
+                        </div>
+                  </div>
+
+            </div>
+            <footer>
+                  {% block footer %}
+                  <hr class="footer-line mt-0" />
+                  <div class="container-fluid">
+                        <div class="container">
+                              <div class="row">
+                                    <div class="col-md-4 col-sm-12">
+                                          <div class="logo-footer">
+                                                <a href=""><img src="{{ asset('images/logo.png') }}" alt="logo footer"
+                                                            height="48" width="100" /></a>
+                                          </div>
+                                          <p>
+                                                <span>Address:</span> Rue pinel, Saint-Denis, 93200, France
+                                          </p>
+                                          <p><span>Email:</span> mohammadhossain109@gmail.com</p>
+                                          <p><span>Portable:</span> 0751010101010</p>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12">
+                                          <h5>Informations</h5>
+                                          <ul class="list-unstyled">
+                                                <li>
+                                                      <a href="#" class="text-decoration-none">
+                                                            Information livraison</a>
+                                                </li>
+                                                <li>
+                                                      <a href="#" class="text-decoration-none"> Privacy Policy</a>
+                                                </li>
+                                                <li>
+                                                      <a href="#" class="text-decoration-none"> Contactez-nous</a>
+                                                </li>
+                                                <li><a href="#" class="text-decoration-none">Site Map</a></li>
+                                                <li>
+                                                      <a href="#" class="text-decoration-none"> Nous Somme Qui</a>
+                                                </li>
+                                          </ul>
+                                    </div>
+
+                                    <div class="col-md-4 col-sm-12">
+                                          <h5>Subscription</h5>
+                                          {% if app.session.flashBag.has('add') %}
+                                          <div class="souscription-success">
+                                                {% for msg in app.session.flashBag.get('add') %}
+                                                {{ msg }}
+                                                {% endfor %}
+                                          </div>
+                                          {% endif %}
+                                          <p>Inscrivez-vous pour recevoir les dernières nouvelles</p>
+                                          {{
+                                          render(
+                                          controller(
+                                          "App\\Controller\\SouscriptionController::souscrire"
+                                          )
+                                          )
+                                          }}
+                                    </div>
+                              </div>
+                        </div>
+                  </div>
+                  <div class="container-fluid bg-dark mt-5">
+                        <div class="container pt-3 pb-3">
+                              <p class="text-light"> * Sauf jours fériés, samedi et dimanche</p>
+                              <p class="text-light">© 2023 Le Virtual Commerce | Tous droits réservés | Réalisé et
+                                    propulsé par Mohammad
+                              <p>
+                        </div>
+
+                  </div>
+                  {% endblock %}
+            </footer>
+      </div>
+      {% endblock %}
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+      {% block nivojs %}
+      <script type="text/javascript" src="slider/scripts/jquery-1.9.0.min.js"></script>
+      <script type="text/javascript" src="slider/jquery.nivo.slider.js"></script>
+      <script type="text/javascript">
+            $(window).load(function () {
+                  $("#slider").nivoSlider();
+            });
+      </script>
+      <script type="text/javascript">
+            //hide flash bag message
+            const alerts = document.querySelectorAll('[class*="alert-"]');
+            for (const alert of alerts) {
+                  setTimeout(function () {
+                        const bootstrapAlert = bootstrap.Alert.getOrCreateInstance(alert);
+                        bootstrapAlert.close();
+                  }, 3000);
+            }
+      </script>
+      <!----plugin select2-->
+      <script src="{{ asset('node_modules/select2/dist/js/select2.min.js') }}"></script>
+      <script src="{{ asset('node_modules/jquery/dist/jqeury.min.js') }}"></script>
+      <!----fin de plugin select2-->
+      {% endblock %}
+</body>
+
+</html>

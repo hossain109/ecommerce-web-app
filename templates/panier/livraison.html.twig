@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8" />
+      <title>{% block title %}Commerce Fruits et Legumes!{% endblock %}</title>
+      <meta name="keywords" content="{% block motCles %} {% endblock %}" />
+      <meta name="description" content="{% block description %} {% endblock %}" />
+      <link rel="icon" href="{{ asset('images/icon.png') }}" />
+
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+            crossorigin="anonymous" />
+      <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" />
+      <link rel="stylesheet" href="{{ asset('css/stylesheet.css') }}" type="text/css" />
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+      {% block main %}
+      <div class="container-fluid">
+            <header class="pt-3 pb-3 bg-success">
+                  {% block header %}
+                  <div class="row">
+                        <div class="col text-center">
+                              <span class="text-light fw-bold fs-5">Nouveaux horaires de livraison &#x1F69A; 07:00 à
+                                    22:00 du lundi au
+                                    vendredi ! |
+                                    Posez vos questions
+                                    sur Whatsapp &#128222; +33751292264</span>
+                        </div>
+                  </div>
+                  {% endblock %}
+            </header>
+
+            <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+                  {% block nav %}
+                  <div class="container">
+
+                        <a href="{{ path('accueil') }}" class="navbar-brand text-decoration-none text-light">
+                              <img src="{{ asset('images/logo.png') }}" alt="logo" class="logo" height="40"
+                                    width="40" /><span class="text-dark">@virtual-C</span>
+                        </a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                              data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                              aria-expanded="false" aria-label="Toggle navigation">
+                              <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                              <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto">
+                                    {{
+                                    render(
+                                    controller("App\\Controller\\CategoriesController::menu")
+                                    )
+                                    }}
+                                    <li class="nav-item">
+                                    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                                          <a class="text-decoration-none text-dark bg-info rounded fs-5 nav-link nav-menu" href="{{ path('app_logout') }}">Déconnexion</a>
+                                    {% endif %}
+                                    </li>
+                              </ul>
+                        </div>
+                        <div>
+                              <a class="text-dark fs-6" href="{{ path('panier_index') }}"><i
+                                          class="bi bi-cart3 panier-icon" style="font-size: 28px"></i></a><span
+                                    class="badge badge-light bg-dark">(&nbsp;{{
+                                    app.session.get("panier") |
+                                    length }}&nbsp;)</span>
+
+                        </div>
+                  </div>
+                  {% endblock %}
+            </nav>
+            <main>
+                  <!--embeded controller pour affichage item et prix -->
+                  {{
+                  render(controller("App\\Controller\\PanierController::itemscount"))
+                  }}
+                  
+                  {% if is_granted('ROLE_USER') %}
+                  {% block section %}
+                  <div class="container">
+                        <form action="{{path('valider_command')}}" method="post">
+                              <div class="row">
+                                    <div class="col-md-6 border-end">
+                                          <h4 class="text-center pt-5 mb-5">Adresse de livraison</h4>
+                                          <div class="row">
+                                                <div class="form-group col-md-6">
+                                                      <label for="pnom">Prenom</label>
+                                                      <input type="text" class="form-control" id="pnom" name="pnom"
+                                                            placeholder="Prenom" required>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                      <label for="nom">Nom</label>
+                                                      <input type="text" class="form-control" name="nom" id="nom"
+                                                            placeholder="Nom" required>
+                                                </div>
+                                          </div>
+                                          <div class="form-gourp mt-2">
+                                                <label for="adresse">Adresse</label>
+                                                <input type="text" class="form-control" id="adresse" required>
+                                          </div>
+                                          <div class="row mt-2">
+                                                <div class="form-group col-md-6">
+                                                      <label for="code">Code postale</label>
+                                                      <input type="number" class="form-control" id="code" name="code"
+                                                            placeholder="Code postale" required>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                      <label for="ville">Ville</label>
+                                                      <input type="text" class="form-control" id="ville" name="ville"
+                                                            placeholder="Ville" required>
+                                                </div>
+                                          </div>
+                                          <div class="form-gourp mt-2">
+                                                <label for="portable">Portable</label>
+                                                <input type="number" class="form-control" id="portable" name="portable"
+                                                      required>
+                                          </div>
+                                          <div class="form-gourp mt-2">
+                                                <label for="pays">Pays</label>
+                                                <select name="pays" id="pays" class="form-select" required>
+                                                      <option selected value="france">France</option>
+                                                      <option value="spain">Spain</option>
+                                                      <option value="belge">Belge</option>
+                                                      <option value="allmande">Allmande</option>
+                                                      <option value="italie">Italie</option>
+                                                      <option value="royume-uni">Royume-uni</option>
+                                                      <option value="monacco">Monacco</option>
+                                                </select>
+                                          </div>
+                                          <div>
+                                                <input type="checkbox" id="add-fac" name="add-fact" class="mt-4"
+                                                      value="yes" required>
+                                                <label for="add-fac">Cette adresse aussi l'adresse de
+                                                      facturation.</label>
+                                          </div>
+
+                                    </div>
+                                    <div class="col-md-6">
+                                          <h4 class="text-center pt-5">Method de Paiement</h4>
+
+                                          <legend class="mt-5">Carte Bancaire</legend>
+                                          <div class=" bg-light p-5">
+                                                <div>
+                                                      <label for="cardNumber">Numéro de carte*</label>
+                                                      <div>
+                                                            <input type="number" id="cardNumber" name="cardNumber"
+                                                                  class="w-100" maxlength="19"
+                                                                  placeholder="1234 1234 1234 1234" required><span
+                                                                  style="position: absolute; margin-left: -24px;"><i
+                                                                        class="fa-solid fa-id-card"></i></span>
+                                                      </div>
+                                                </div>
+                                                <div>
+                                                      <label for="dateExpiration">Date d'expiration*</label>
+                                                      <div>
+                                                            <input type="text" id="dateExpiration" name="dateExpiration"
+                                                                  class="w-100" maxlength="5" placeholder="MM/AA"
+                                                                  required>
+                                                      </div>
+                                                </div>
+                                                <div>
+                                                      <label for="cryptogramme">Cryptogramme visuel*</label>
+                                                      <div>
+                                                            <input type="number" id="cryptogramme" name="cryptogramme"
+                                                                  class="w-100" maxlength="3" placeholder="CVC"
+                                                                  required>
+                                                      </div>
+                                                </div>
+                                                <div>
+                                                      <input type="checkbox" id="conditionagree" name="conditionagree"
+                                                            class="mt-4" required>
+                                                      <label for="conditionagree">Enregistrer les informations de
+                                                            paiement sur
+                                                            mon compte
+                                                            pour de futurs achats.</label>
+                                                </div>
+                                          </div>
+                                          <div class="mt-5">
+                                                <p>
+                                                      Vos données personnelles seront utilisées pour le traitement
+                                                      de
+                                                      votre
+                                                      commande, vous accompagner au cours de votre visite du site
+                                                      web,
+                                                      et pour
+                                                      d'autres raisons décrites dans notre <span><a href="">
+                                                                  politique
+                                                                  de
+                                                                  confidentialité.</a></span>
+                                                </p>
+
+                                          </div>
+                                          <div class="mt-5">
+                                                <input type="checkbox" name="politique" id="politique" required>
+                                                <label for="politique">J'ai lu et j'accepte les <span><a
+                                                                  href="">conditions
+                                                                  générales *</a> </span></label>
+                                          </div>
+                                          <div id="politique_field" class="text-danger mt-4">
+                                                Veuillez indiquer les informations corrects pour ce champs
+                                                obligatoire.
+                                          </div>
+                                    </div>
+                                    <div class="form-group mt-5">
+                                          <button type="submit" class="btn btn-outline-success float-end" name="pdf"
+                                                id="pdf">Valider
+                                                Command</button>
+                                    </div>
+                              </div>
+                        </form>
+                  </div>
+                  {% endblock %}
+            {% else %}
+            {{render(controller("App\\Controller\\CompteController::index"))}}
+            {% endif %}
+            </main>
+
+            <footer>
+                  {% block footer %}
+                  <hr class="footer-line" />
+                  <div class="container-fluid">
+                        <div class="container">
+                              <div class="row">
+                                    <div class="col-md-4 col-sm-12">
+                                          <div class="logo-footer">
+                                                <a href=""><img src="{{ asset('images/logo.png') }}" alt="logo footer"
+                                                            height="48" width="100" /></a>
+                                          </div>
+                                          <p>
+                                                <span>Address:</span> Rue pinel, Saint-Denis, 93200, France
+                                          </p>
+                                          <p><span>Email:</span> mohammadhossain109@gmail.com</p>
+                                          <p><span>Portable:</span> 0751010101010</p>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12">
+                                          <h5>Informations</h5>
+                                          <ul class="list-unstyled">
+                                                <li>
+                                                      <a href="#" class="text-decoration-none">
+                                                            Information livraison</a>
+                                                </li>
+                                                <li>
+                                                      <a href="#" class="text-decoration-none"> Privacy Policy</a>
+                                                </li>
+                                                <li>
+                                                      <a href="#" class="text-decoration-none"> Contactez-nous</a>
+                                                </li>
+                                                <li><a href="#" class="text-decoration-none">Site Map</a></li>
+                                                <li>
+                                                      <a href="#" class="text-decoration-none"> Nous Somme Qui</a>
+                                                </li>
+                                          </ul>
+                                    </div>
+
+                                    <div class="col-md-4 col-sm-12">
+                                          <h5>Subscription</h5>
+                                          {% if app.session.flashBag.has('add') %}
+                                          <div class="souscription-success">
+                                                {% for msg in app.session.flashBag.get('add') %}
+                                                {{ msg }}
+                                                {% endfor %}
+                                          </div>
+                                          {% endif %}
+                                          <p>Inscrivez-vous pour recevoir les dernières nouvelles</p>
+                                          {{
+                                          render(
+                                          controller(
+                                          "App\\Controller\\SouscriptionController::souscrire"
+                                          )
+                                          )
+                                          }}
+                                    </div>
+                              </div>
+                        </div>
+                  </div>
+                  <div class="container-fluid bg-dark mt-5">
+                        <div class="container pt-3 pb-3">
+                              <p class="text-light"> * Sauf jours fériés, samedi et dimanche</p>
+                              <p class="text-light">© 2023 Le Virtual Commerce | Tous droits réservés | Réalisé et
+                                    propulsé par Mohammad
+                              <p>
+                        </div>
+
+                  </div>
+                  {% endblock %}
+            </footer>
+      </div>
+      {% endblock %}
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+      <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+            integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+      <script>
+            $(document).ready(function () {
+                  $("#politique").change(function () {
+                        if ($('#politique').is(":checked")) {
+                              $('#politique_field').css('display', 'none');
+                        } else {
+                              $('#politique_field').css('display', 'block');
+                        }
+                  })
+            })
+      </script>
+
+</body>
+
+</html>

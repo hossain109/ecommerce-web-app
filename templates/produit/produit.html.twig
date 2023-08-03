@@ -1,0 +1,62 @@
+{% extends "base.html.twig" %}
+{% block section %}
+<div class="container mt-5 mb-5">
+  <!---Affiche recherceh formulaire-->
+  <div class="row  m-5 justify-content-center">
+    <div class="header-left col-md-12 col-sm-12 ">
+      {{
+      render(
+      controller("App\\Controller\\SearchController::searchForm")
+      )
+      }}
+    </div>
+  </div>
+  <div class="row">
+    <!---Display Souscategorie-->
+    <div class="col-md-2">
+      {% if categories|length !=null %}
+      <ul class="list-unstyled">
+        {% for categorie in categories %}
+        <li class="page-link text-center"><a class="text-decoration-none"
+            href="{{ path('categorie_produit', { categorie: categorie.id }) }}">{{
+            categorie.nom }}</a>
+        </li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </div>
+
+    <div class="col-md-10">
+      <div class="row">
+       {% if produits|length !=null %}
+        {% for produit in produits %}
+        <div class="col-md-3 col-sm-6 xs-12">
+          <div class="card">
+            <img class="card-img-top" src="images{{ asset(produit.image.path) }}" alt="{{ produit.image.alt }}" />
+            <div class="card-body">
+              <h5 class="card-title text-center">{{ produit.nom }}</h5>
+              <p>
+                <span>Prix: {{ produit.prix }}&#8364;</span>
+                <span class="float-end">{{
+                  produit.disponible ? " <span class='text-success'>En Stock</span>" : "<span class='text-danger'>Non
+                    Stock</span>"
+                  }}</span>
+              </p>
+              <p class="card-text">{{ produit.description }}</p>
+              <a href="{{ path('produit_presentation', { id: produit.id }) }}" class="btn btn-info">Info</a>
+              {% if(produit.disponible) %}
+              <a href="{{ path('ajout_panier',{id: produit.id}) }}" class="btn btn-secondary">Ajouter</a>
+              {% else %}
+              <a href="{{ path('ajout_panier',{id: produit.id}) }}" class="disabled btn btn-secondary">Ajouter</a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        {% endfor %} {% else %}
+        <h2>Aucun Produit</h2>
+        {% endif %}
+        </div>
+        </div>
+</div>
+</div>
+{% endblock %}

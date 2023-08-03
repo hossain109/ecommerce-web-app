@@ -1,0 +1,20 @@
+
+{% extends "baseAdmin.html.twig" %}
+
+{% block section %}
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+     {% if app.session.flashBag.has('success') %}
+      <div class="alert alert-success">
+        {% for msg in app.session.flashBag.get('success') %}
+        {{ msg }}
+        {% endfor %}
+      </div>
+      {% endif %}
+<h4 class='mt-5 mb-5'>Ajouter image dans votre produit</h4>
+{{ form_start(form) }}
+      {{ form_row(form.path) }}
+      {{ form_row(form.alt) }}
+{{ form_end(form) }}
+
+{% endif %}
+{% endblock %}

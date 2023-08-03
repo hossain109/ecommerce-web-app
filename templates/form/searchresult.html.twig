@@ -1,0 +1,40 @@
+{% extends "base.html.twig" %} {% block section %}
+<div class="container">
+  <!---Display produits-->
+  <div class="display-produit">
+    {% if produits|length !=null %} {% for produit in produits %}
+    <div class="produit-item">
+      <img
+        src="{{ produit.image.path }}"
+        alt="{{ produit.image.alt }}"
+        width="100%"
+        height="50%"
+      />
+      <div class="produit-details">
+        <h5 class="text-center">{{ produit.nom }}</h5>
+        <p>{{ produit.description }}</p>
+        <p>
+          <span>Prix: {{ produit.prix }}&#8364;</span>
+          <span class="float-end">{{
+            produit.disponible ? "En Stock" : "Non Stock"
+          }}</span>
+        </p>
+      </div>
+      <a
+        href="{{ path('produit_presentation', { id: produit.id }) }}"
+        class="btn btn-info"
+        >Plus d'info</a
+      >
+      {% if(produit.disponible) %}
+      <a href="{{ path('ajout_panier',{id: produit.id}) }}" class="btn btn-secondary float-end mb-2">Ajouter Au Panier</a>
+      {% else %}
+      <a href="{{ path('ajout_panier',{id: produit.id}) }}" class="disabled btn btn-secondary float-end mb-2">Ajouter Au Panier</a>
+      {% endif %}
+    </div>
+    {% endfor %} {% else %}
+
+  </div>
+    <h2>Aucun Produit de votre recherche</h2>
+    {% endif %}
+</div>
+{% endblock %}
