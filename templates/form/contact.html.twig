@@ -19,11 +19,12 @@
                   <div class=" p-4 rounded border border-secondary opacity-50 mb-4">
                         <p class="mt-1 mb-4">Notre équipe est à votre écoute pour toutes vos questions ou réclamations.
                         </p>
-                        {{form_start(form, {'action': path('contact_action'), 'method':'POST' ,'attr': {'novalidate': 'novalidate'} }) }}
+                        {{form_start(form, {'action': path('contact_action'), 'method':'POST'  }) }}
                         {{form_row(form.nom)}}
                         {{form_row(form.email)}}
                         {{form_row(form.portable)}}
                         {{form_row(form.message)}}
+                        {{form_row(form.createdAt)}}
                         {{form_end(form)}}
                   </div>
             </div>

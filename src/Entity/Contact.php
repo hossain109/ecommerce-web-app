@@ -33,17 +33,8 @@ class Contact
     private ?string $message = null;
 
     #[ORM\Column]
-    #[Assert\Date]
-    protected string $createdAt;
+    private ?\DateTime $createdAt = null;
 
-    public function setCreatedAt($createdAt){
-        $this->createdAt = $createdAt;
-        return $this;
-    }
-
-    public function getCreatedAt(){
-        return $this->createdAt;
-    }
 
     public function getId(): ?int
     {
@@ -97,4 +88,17 @@ class Contact
 
         return $this;
     }
+
+    public function getCreatedAt(): ?\DateTime
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTime $createdAt): static
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
 }

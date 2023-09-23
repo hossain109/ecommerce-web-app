@@ -109,22 +109,53 @@ class PanierController extends AbstractController{
     }
     //valid for pdf
     #[Route('valider/command',name:'valider_command')]
-    public function validcommand(){
+    public function validcommand(Request $request,ProduitsRepository $repository){
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $value = $_POST;
+        //on recupere le panier actual
+        $session = $request->getSession();
+        $panier = $session->get("panier",[]);
+        //recupere les produits 
+        $datapanier = [];
+        $totalHT = 0;
+        //cherche produit par raaport produit id dans le panier
+        foreach ($panier as $id => $quantite) {
+            $produit = $repository->find($id);
+            //dump($produit);die;
+            $datapanier [] = [
+                "produit"=>$produit,
+                "quantite"=>$quantite
+            ];
+            $totalHT += $produit->getPrix()*$quantite;      
+            }
         }
-      return $this->render('panier/pdf.html.twig',['post'=>$value]);
+      return $this->render('panier/pdf.html.twig',['post'=>$value,"datapanier"=>$datapanier,"total"=>$totalHT]);
  
     }
-    #[Route('generate/pdf',name:'generate_pdf')]
-    public function generatePdf(PdfService $pdf){
+    // #[Route('generate/command',name:'generate_pdf')]
+    // public function generatePdf(Request $request,PdfService $pdf,ProduitsRepository $repository){
+    //     if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    //         $value = $_POST;
+    //     //recupere les produits 
+    //     $datapanier = [];
+    //     $totalHT = 0;
+    //    // dump($panier);
+    //     //cherche produit par raaport produit id dans le panier
+    //     $session = $request->getSession();
+    //     $panier = $session->get("panier",[]);
+    //     foreach ($panier as $id => $quantite) {
+    //         $produit = $repository->find($id);
+    //         //dump($produit);die;
+    //         $datapanier [] = [
+    //             "produit"=>$produit,
+    //             "quantite"=>$quantite
+    //         ];
+    //         $totalHT += $produit->getPrix()*$quantite;      
+    //         }
+    //     }
+    //     $this->render('panier/pdf.html.twig',['post'=>$value,"datapanier"=>$datapanier,"total"=>$totalHT]);
 
-        //return $this->render('panier/pdf.html.twig');
-        $html = $this->render('panier/pdf.html.twig');
-       
-        $pdf->showPdfFile($html);
-
-    }
+    // }
 
     //valid for pdf
     // #[Route('valider/command',name:'valider_command')]

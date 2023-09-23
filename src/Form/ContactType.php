@@ -20,6 +20,7 @@ class ContactType extends AbstractType
         $builder
             ->add('nom', TextType::class,[
                 'label'=>'Nom*',
+                'required'=>true,
                 'row_attr' => ['class' => 'form-group mb-3'],
                 'attr'=>[
                     'class'=>'form-control'
@@ -27,6 +28,7 @@ class ContactType extends AbstractType
             ])
             ->add('email',EmailType::class,[
                 'label'=>'Email*',
+                'required'=>true,
                 'row_attr' => ['class' => 'form-group mb-3'],
                 'attr'=>[
                     'class'=>'form-control'
@@ -34,6 +36,7 @@ class ContactType extends AbstractType
             ])
             ->add('portable',IntegerType::class,[
                 'label'=>'Telephone Portable*',
+                'required'=>true,
                 'row_attr' => ['class' => 'form-group mb-3'],
                 'attr'=>[
                     'class'=>'form-control'
@@ -41,17 +44,23 @@ class ContactType extends AbstractType
             ])
             ->add('message',TextareaType::class,[
                 'label'=>'Votre Message*',
+                'required'=>true,
                 'row_attr' => ['class' => 'form-group mb-3'],
                 'attr'=>[
                     'class'=>'form-control'
                 ]
             ])
-            ->add('createdAt',DateTimeType::class)
+            ->add('createdAt',DateTimeType::class,[
+                'label'=>false,
+                'attr'=>[
+                   'style'=> 'display:none'
+                ]
+            ])
             
             ->add('contact',SubmitType::class,[
                 'attr'=>[
                     'type'=>'button',
-                    'class'=>'btn btn-outline-success'
+                    'class'=>'btn btn-outline-success mt-3'
                 ]
               ]);
         ;

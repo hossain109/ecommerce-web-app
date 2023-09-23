@@ -36,9 +36,9 @@
                   {% block nav %}
                   <div class="container">
 
-                        <a href="{{ path('admin_addproduit') }}" class="navbar-brand text-decoration-none text-light">
+                        <a href="{{ path('accueil') }}" class="navbar-brand text-decoration-none text-light">
                               <img src="{{ asset('images/logo.png') }}" alt="logo" class="logo" height="40"
-                                    width="40" /><span class="text-dark">@Authentification</span>
+                                    width="40" /><span class="text-dark">Les3Fermes</span>
                         </a>
                   </div>
                   {% endblock %}
@@ -59,6 +59,9 @@
                                     <li class="page-link text-center"><a class="text-decoration-none"
                                                 href="{{ path('admin_souscategorie') }}">Ajouter
                                                 Souscategorie</a>
+                                    </li>
+                                    <li class="page-link text-center"><a class="text-decoration-none"
+                                                href="{{ path('contact_message') }}">Messages des contacts</a>
                                     </li>
                                     <li class="page-link text-center bg-warning">
                                     {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
@@ -155,8 +158,8 @@
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
       {% block nivojs %}
-      <script type="text/javascript" src="slider/scripts/jquery-1.9.0.min.js"></script>
-      <script type="text/javascript" src="slider/jquery.nivo.slider.js"></script>
+      <script type="text/javascript" src="{{asset('slider/scripts/jquery-1.9.0.min.js')}}"></script>
+      <script type="text/javascript" src="{{asset('slider/jquery.nivo.slider.js')}}"></script>
       <script type="text/javascript">
             $(window).load(function () {
                   $("#slider").nivoSlider();

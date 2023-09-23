@@ -7,3 +7,22 @@
 
 // any CSS you import will output into a single css file (app.css in this case)
 import './styles/app.css';
+
+$(document).ready(function () {
+      $("#politique").change(function () {
+            if ($('#politique').is(":checked")) {
+                  $('#politique_field').css('display', 'none');
+            } else {
+                  $('#politique_field').css('display', 'block');
+            }
+      })
+
+      $('.nav-menu').click(function (e) {
+            // e.preventDefault();
+            $(this).addClass('custom')
+      })
+
+      $('.page-link a').click(function (e) {
+            $(this).addClass('custom')
+      })
+})

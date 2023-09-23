@@ -32,9 +32,9 @@ class ContactController extends AbstractController{
             //dump($contact);die;
             if($form->isSubmitted() && $form->isValid()){
 
-                 // dump($contact);die;
-                 // $contact->createdAt(new DateTime());
-
+                  
+                  $contact->setCreatedAt(new DateTime());
+                  //dump($contact);die;
                   $contact =  $form->getData();
 
                   $entitymanager->persist($contact);

@@ -46,7 +46,7 @@
 
         <a href="{{ path('accueil') }}" class="navbar-brand text-decoration-none text-light">
           <img src="{{ asset('images/logo.png') }}" alt="logo" class="logo" height="40" width="40" /><span
-            class="text-dark">@virtual-C</span>
+            class="text-dark">Les3Fermes</span>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -82,14 +82,9 @@
       render(controller("App\\Controller\\PanierController::itemscount"))
       }}
       {% block section %}
-      <article>
-        {% block article %}
-        <h2>This is an article..</h2>
-        {% endblock %}
-      </article>
+
       {% endblock %}
 
-      <aside>{% block aside %}{% endblock %}</aside>
     </main>
     <footer>
       {% block footer %}
@@ -115,7 +110,7 @@
                     Information livraison</a>
                 </li>
                 <li>
-                  <a href="#" class="text-decoration-none"> Privacy Policy</a>
+                  <a href="{{path('mention_legale')}}" class="text-decoration-none"> Mention legale</a>
                 </li>
                 <li>
                   <a href="#" class="text-decoration-none"> Contactez-nous</a>
@@ -164,8 +159,8 @@
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"></script>
   {% block nivojs %}
-  <script type="text/javascript" src="slider/scripts/jquery-1.9.0.min.js"></script>
-  <script type="text/javascript" src="slider/jquery.nivo.slider.js"></script>
+  <script type="text/javascript" src="{{asset('slider/scripts/jquery-1.9.0.min.js')}}"></script>
+  <script type="text/javascript" src="{{asset('slider/jquery.nivo.slider.js')}}"></script>
   <script type="text/javascript">
     $(window).load(function () {
       $("#slider").nivoSlider();

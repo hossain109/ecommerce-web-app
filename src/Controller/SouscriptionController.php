@@ -42,6 +42,11 @@ class SouscriptionController extends AbstractController{
         }
         return $this->redirectToRoute("product");
     }
+    #[Route("/legale", name:"mention_legale")]
+    function mentionLegale(){
+
+        return $this->render('mentionlegale.html.twig');
+    }
 }
 
 ?>

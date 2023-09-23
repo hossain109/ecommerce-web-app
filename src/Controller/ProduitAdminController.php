@@ -3,12 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\Media;
+use App\Entity\Contact;
 use App\Entity\Produits;
 use App\Entity\Souscategorie;
 use App\Form\MediaType;
 use App\Form\ProduitType;
 use App\Form\SouscategorieType;
 use Doctrine\Persistence\ManagerRegistry;
+//use Doctrine\Migrations\Configuration\EntityManager\ManagerRegistryEntityManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -78,7 +80,7 @@ class ProduitAdminController extends AbstractController{
                     // updates the 'brochureFilename' property to store the PDF file name
                     // instead of its contents
                     //dump(`images/{$newFilename}`);die;
-                    $media->setPath("images/".$newFilename);
+                    $media->setPath($newFilename);
                     //dump($media->getPath());die;
                 }
 
@@ -125,5 +127,33 @@ class ProduitAdminController extends AbstractController{
         }
 
        return $this->render('pageAdmin/souscategorieAdmin.html.twig', ['form'=>$form->createView()]);
+      }
+      //All contact message
+      #[Route('/contactMessage', name:'contact_message')]
+      public function allContactMessage(ManagerRegistry $doctrine){
+
+        $messages = $doctrine->getRepository(Contact::class)->findAll();
+
+        return $this->render('pageAdmin/contactMessage.html.twig',['messages'=>$messages]);
+
+      }
+      //Delete contact message
+      #[Route('/messageDelete/{id}',methods:['get'], name:'message_delete')]
+      public function contactMessageDelete($id,ManagerRegistry $doctrine){
+
+        $message = $doctrine->getRepository(Contact::class)->find($id);
+
+        //var_dump($message);die;
+
+        $manager = $doctrine->getManager();
+
+        $manager->remove($message);
+
+        $manager->flush();
+
+         $this->addFlash('success','message suprimmer avec success');
+
+        return $this->redirectToRoute("contact_message");
+
       }
 }

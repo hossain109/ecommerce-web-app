@@ -18,6 +18,7 @@
 </head>
 
 <body>
+{% if is_granted('ROLE_USER') %}
       {% block main %}
       <div class="container-fluid">
             <header class="pt-3 pb-3 bg-success">
@@ -78,10 +79,10 @@
                   render(controller("App\\Controller\\PanierController::itemscount"))
                   }}
                   
-                  {% if is_granted('ROLE_USER') %}
+
                   {% block section %}
                   <div class="container">
-                        <form action="{{path('valider_command')}}" method="post">
+                        <form action="{{ path('valider_command') }}"  target="_blank" method="post">
                               <div class="row">
                                     <div class="col-md-6 border-end">
                                           <h4 class="text-center pt-5 mb-5">Adresse de livraison</h4>
@@ -99,7 +100,7 @@
                                           </div>
                                           <div class="form-gourp mt-2">
                                                 <label for="adresse">Adresse</label>
-                                                <input type="text" class="form-control" id="adresse" required>
+                                                <input type="text" class="form-control" name="adresse" id="adresse" required>
                                           </div>
                                           <div class="row mt-2">
                                                 <div class="form-group col-md-6">
@@ -213,9 +214,6 @@
                         </form>
                   </div>
                   {% endblock %}
-            {% else %}
-            {{render(controller("App\\Controller\\CompteController::index"))}}
-            {% endif %}
             </main>
 
             <footer>
@@ -289,6 +287,9 @@
             </footer>
       </div>
       {% endblock %}
+      {% else %}
+            {{render(controller("App\\Controller\\CompteController::index"))}}
+      {% endif %}
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>

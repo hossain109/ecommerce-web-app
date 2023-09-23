@@ -17,19 +17,19 @@
     </div>
     <div id="htmlcaption1" class="nivo-html-caption">
       <strong class="caption-text"> Les meilleurs fruits et légumes de Rungis livrés chez vous </strong>
-      <p class="caption-button"><a class="btn btn-success" href="#">Commencer</a></p>
+      <p class="caption-button"><a class="btn btn-success" href="{{path('all_product')}}">Commencer</a></p>
     </div>
     <div id="htmlcaption2" class="nivo-html-caption">
       <strong class="caption-text"> Meilleurs Produits Primeurs Sélectionnés par nos équipes </strong>
-      <p class="caption-button"><a class="btn btn-success" href="#">B link</a></p>
+      <p class="caption-button"><a class="btn btn-success" href="{{path('categorie_produit', {categorie: 2})}}">Fruits</a></p>
     </div>
     <div id="htmlcaption3" class="nivo-html-caption">
       <strong class="caption-text"> Des Fruits et légumes de qualité au juste prix </strong>
-      <p class="caption-button"><a class="btn btn-success" href="#">C link</a></p>
+      <p class="caption-button"><a class="btn btn-success" href="{{path('categorie_produit', {categorie: 3})}}">Fruits Sec</a></p>
     </div>
     <div id="htmlcaption4" class="nivo-html-caption">
       <strong class="caption-text"> Livraison express En Ile-de-France </strong>
-      <p class="caption-button"><a class="btn btn-success" href="#">D link</a></p>
+      <p class="caption-button"><a class="btn btn-success" href="{{path('categorie_produit', {categorie: 1})}}">Legumes</a></p>
     </div>
   </div>
 </div>
@@ -41,20 +41,20 @@
         <h2 class="fw-bolder">Notre zone de livraison</h2>
         <p class="fs-5 text-warning">Vos fruits et légumes livrés en Île-de-France</p>
         <p class="fs-6">
-          Je vous remerciant d'avoir choisir le Virtual Commerce pour la livraison de vos fruits et legumes. Il sont été
+          Je vous remerciant d'avoir choisir le Les3Fermes  pour la livraison de vos fruits et legumes. Il sont été
           consiencieusement choisis avec soins.
         <p class="fs-6">
           N'hesitez pas à nos faire vos retour ou à la aimer nos pages facebook et instagram.
         </p>
         <p class="fs-6">
-          Bonne dégustation et bientot sur virtaulcommerce.fr !!
+          Bonne dégustation et bientot sur <a href="{{path('accueil')}}">ecommerce.hossainmohammad.eu</a> !!
         </p>
         </p>
       </div>
       <div class="col-md-6 ">
-        <h3 class="fw-bolder text-center">Le Virtual Commerce, votre primeur en ligne</h3>
+        <h3 class="fw-bolder text-center">Le Les3Fermes, votre primeur en ligne</h3>
         <p class="fs-5 text-warning"> Depuis quelques anées nous facilitons votre quotidien</p>
-        <p class="fs-6">Dès sa création en 1963, Les 5 fermes s'est donné pour mission de rapprocher producteurs et
+        <p class="fs-6">Dès sa création en 2023, Les 3 fermes s'est donné pour mission de rapprocher producteurs et
           consommateurs
           autour
           des notions de qualité et juste prix.
@@ -79,21 +79,21 @@
     <p class="text-center fs-4 text-warning ">Vos fruits et légumes de qualité, de Rungis à chez vous en un clic</p>
     <div class="row mt-5 mb-5">
       <div class="col-md-4">
-        <a href="{{path('categorie_produit', {categorie: 6})}}" class="image-link"> <img
+        <a href="{{path('categorie_produit', {categorie: 1})}}" class="image-link"> <img
             class="rounded-3 opacity-50 imgfix m-3 " src="{{ asset('images/accueil1.jpg') }}" height="200" width="95%"
             alt="image accueil">
           <p class="image-text text-center text-light fs-3 fw-bolder">Legumes</p>
         </a>
       </div>
       <div class=" col-md-4">
-        <a href="{{path('categorie_produit', {categorie: 7})}}" class="image-link"> <img
+        <a href="{{path('categorie_produit', {categorie: 2})}}" class="image-link"> <img
             class="rounded-3 opacity-50 imgfix m-3 " src="{{ asset('images/accueil2.jpg') }}" height="200" width="95%"
             alt="image accueil">
           <p class="image-text text-center text-light fs-3 fw-bolder">Fruits</p>
         </a>
       </div>
       <div class="col-md-4">
-        <a href="{{path('categorie_produit', {categorie: 8})}}" class="image-link"> <img
+        <a href="{{path('categorie_produit', {categorie: 3})}}" class="image-link"> <img
             class="rounded-3 opacity-50 imgfix m-3 " src="{{ asset('images/aceuil3.jpg') }}" height="200" width="95%"
             alt="image accueil">
           <p class="image-text text-center text-light fs-3 fw-bolder">Fruits Secs</p>
